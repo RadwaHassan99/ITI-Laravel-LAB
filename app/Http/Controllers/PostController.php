@@ -34,7 +34,7 @@ class PostController extends Controller
         return view('post.index', ['posts' => $allPosts]);
     }
 
-    public function show($id)
+    public function show()
     {
 //        dd($id);
         $post =  [
@@ -57,6 +57,7 @@ class PostController extends Controller
     public function edit()
     {
         $post =  [
+            'id' => "3",
             'title' => 'Laravel',
             'posted_by' => 'Radwa',
             'discription' => 'Laravel is a framework based on PHP'

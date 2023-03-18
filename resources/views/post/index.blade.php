@@ -31,9 +31,6 @@ use App\View\Components\Button;
             <td>{{$post['created_at']}}</td>
             <td>
             <x-button type="primary" :route-param="$post['id']">View</x-button>
-
-
-
             <x-button type="secondary">Edit</x-button>
                 <x-button type="danger">Delete</x-button>
             </td>
