@@ -53,4 +53,14 @@ class PostController extends Controller
     {
         return view('post.create');
     }
+
+    public function edit()
+    {
+        $post =  [
+            'title' => 'Laravel',
+            'posted_by' => 'Radwa',
+            'discription' => 'Laravel is a framework based on PHP'
+        ];
+        return view('post.edit', ['post' => $post]);
+    }
 }
