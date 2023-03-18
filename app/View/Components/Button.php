@@ -1,4 +1,5 @@
 <?php
+
 namespace App\View\Components;
 
 use Closure;
@@ -11,26 +12,31 @@ class Button extends Component
     public $url;
     public $routeParam;
 
-    public function __construct($type = null, $url = null, $routeParam = null)
+    public function __construct($type = null, $routeParam = null)
     {
         $this->type = $type;
-        $this->url = $url ?? $this->getUrl();
+        $this->url = $this->getUrl() ?? "";
         $this->routeParam = $routeParam;
     }
+
 
     public function getUrl()
     {
         switch ($this->type) {
             case 'primary':
-                if (!empty($this->routeParam)) {
-                    return route('posts.show', ['post' => $this->routeParam]);
-                }
+
+                return route('posts.show', "");
+
+                break;
+
 
             case 'secondary':
                 return route('posts.edit');
+                break;
 
             case 'danger':
                 return route('posts.index');
+                break;
 
             default:
                 return '#';
@@ -45,7 +51,7 @@ class Button extends Component
         return view('components.button', [
             'url' => $this->url,
             'type' => $this->type,
+            'routeParam' => $this->routeParam,
         ]);
     }
 }
-

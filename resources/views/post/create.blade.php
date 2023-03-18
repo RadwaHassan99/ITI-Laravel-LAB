@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@extends('components.button')
 
 @section('title') Create @endsection
 

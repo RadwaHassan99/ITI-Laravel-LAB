@@ -38,7 +38,7 @@ class PostController extends Controller
     {
 //        dd($id);
         $post =  [
-            'id' => 3,
+            'id' => "3",
             'title' => 'Javascript',
             'posted_by' => 'Ali',
             'created_at' => '2022-08-01 10:00:00',

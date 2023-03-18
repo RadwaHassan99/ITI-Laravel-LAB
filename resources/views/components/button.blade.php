@@ -1,8 +1,4 @@
-@php
-    use App\View\Components\Button
-@endphp
-
-<a href="{{ $url }}" class="btn btn-{{ $type }}">
+<a href="{{ $url }}/{{$routeParam}}" class="btn btn-{{ $type }}">
     {{ $slot }}
 </a>
 
