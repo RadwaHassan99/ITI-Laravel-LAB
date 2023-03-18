@@ -1,6 +1,3 @@
-@php
-use App\View\Components\Button;
-@endphp
 
 @extends('layouts.app')
 
@@ -9,7 +6,7 @@ use App\View\Components\Button;
 
 @section('content')
 <div class="text-center">
-    <a class="mt-4 btn btn-success" href="{{route('posts.create')}}">Create Post</a>
+  <x-button type="success">Create Post</x-button>
 </div>
 <table class="table mt-4">
     <thead>

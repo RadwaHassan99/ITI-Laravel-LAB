@@ -23,6 +23,10 @@ class Button extends Component
     public function getUrl()
     {
         switch ($this->type) {
+            case 'success':
+                return route('posts.create',"");
+                break;
+
             case 'primary':
                 return route('posts.show', "");
                 break;
