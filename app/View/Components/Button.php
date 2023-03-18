@@ -24,14 +24,12 @@ class Button extends Component
     {
         switch ($this->type) {
             case 'primary':
-
                 return route('posts.show', "");
-
                 break;
 
 
             case 'secondary':
-                return route('posts.edit');
+                return route('posts.edit',"");
                 break;
 
             case 'danger':
