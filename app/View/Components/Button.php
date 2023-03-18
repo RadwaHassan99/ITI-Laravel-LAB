@@ -48,10 +48,6 @@ class Button extends Component
 
     public function render(): View|Closure|string
     {
-        return view('components.button', [
-            'url' => $this->url,
-            'type' => $this->type,
-            'routeParam' => $this->routeParam,
-        ]);
+        return view('components.button');
     }
 }
