@@ -24,7 +24,7 @@
         <tr>
             <td>{{$post['id']}}</td>
             <td>{{$post['title']}}</td>
-            <td>{{$post['posted_by']}}</td>
+            <td>{{$post->User->name ?? "Not Found"}}</td>
             <td>{{$post['created_at']}}</td>
             <td>
             <x-button type="primary" :route-param="$post['id']">View</x-button>

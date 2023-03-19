@@ -4,21 +4,24 @@
 
 @section('content')
 <form action="{{ route('posts.store') }}" method="POST">
-@csrf
-  <div class="mb-3">
-    <label for="title" class="form-label">Title</label>
-    <input type="text" class="form-control" id="title" name="title" value="{{$post['title']}}" >
-  </div>
-  <div class="mb-3" style="height: 7rem;">
-    <label for="description" class="form-label">Description</label>
-    <input type="text" class="form-control h-75" id="description" name="description" value="{{$post['description']}}">
-</div>
+    @csrf
+    <div class="mb-3">
+        <label for="exampleFormControlInput1" class="form-label">Title</label>
+        <input name="title" type="text" class="form-control" id="exampleFormControlInput1" value="{{$post['title']}}">
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+        <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3">{{$post['description']}}</textarea>
+    </div>
 
-  <div class="mb-3">
-    <label for="PostCreator" class="form-label">Post Creator</label>
-    <input type="text" class="form-control" id="PostCreator" name="PostCreator" value="{{$post['posted_by']}}">
-  </div>
-  <button type="submit" class="btn btn-primary" value="">Edit</button>
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Post Creator</label>
+        <select name="post_creator" class="form-control">
+            <option value="1">A</option>
+            <option value="2">B</option>
+        </select>
+    </div>
+    <button type="submit" class="btn btn-success" value="">Edit</button>
 </form>
 
 @endsection
