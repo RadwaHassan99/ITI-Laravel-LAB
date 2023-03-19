@@ -6,7 +6,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
-
+use App\Models\Comment;
 
 class PostController extends Controller
 {
@@ -64,4 +64,15 @@ class PostController extends Controller
         $post->save();
         return redirect()->route('posts.index');
     }
+    public function storeComment(Request $request)
+{
+    $comment = new Comment;
+    $comment->body = $request->body;
+    $comment->commentable_id = $request->commentable_id;
+    $comment->commentable_type = $request->commentable_type;
+    $comment->save();
+    return back();
+}
+
+
 }

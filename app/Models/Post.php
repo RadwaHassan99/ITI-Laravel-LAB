@@ -22,6 +22,10 @@ class Post extends Model
     {
         return Carbon::parse($value)->format('Y-m-d');
     }
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 
 
 }
