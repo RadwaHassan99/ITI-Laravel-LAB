@@ -39,7 +39,7 @@
             </td>
         </tr>
         @endforeach
-
+        {{ $posts->links('pagination::bootstrap-5') }}
 
 
     </tbody>

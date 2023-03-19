@@ -37,7 +37,7 @@ class Button extends Component
                 break;
 
             case 'danger':
-                return route('posts.index',"");
+                return route('posts.destroy',"");
                 break;
 
             default:
