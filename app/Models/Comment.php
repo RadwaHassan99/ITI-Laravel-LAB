@@ -10,12 +10,11 @@ class Comment extends Model
 {
     use HasFactory;
     public function commentable()
-{
-    return $this->morphTo();
-}
-public function getCreatedAtAttribute($value)
-{
-    return Carbon::parse($value)->format('Y-m-d');
-}
-
+    {
+        return $this->morphTo();
+    }
+    public function getCreatedAtAttribute($value)
+    {
+        return Carbon::parse($value)->format('Y-m-d');
+    }
 }
