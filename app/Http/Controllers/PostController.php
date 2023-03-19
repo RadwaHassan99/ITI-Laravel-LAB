@@ -19,22 +19,20 @@ class PostController extends Controller
         $post = Post::where('id', $id)->first(); //Post model object ... select * from posts where id = 1 limit 1;
         return view('post.show', ['post' => $post]);
     }
+
     public function create()
     {
         $users = User::all();
         return view('post.create', ['users' => $users]);
     }
 
-    public function edit()
+    public function edit($id)
     {
-        $post =  [
-            'id' => "3",
-            'title' => 'Laravel',
-            'post_creator' => 'Radwa',
-            'description' => 'Laravel is a framework based on PHP'
-        ];
-        return view('post.edit', ['post' => $post]);
+        $post = Post::where('id', $id)->first(); //Post model object ... select * from posts where id = 1 limit 1;
+        $users = User::all();
+        return view('post.edit', ['post' => $post, 'users' => $users]);
     }
+
     public function store(Request $request)
     {
         $title = request()->title;
@@ -53,7 +51,15 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $post->delete();
-
+        return redirect()->route('posts.index');
+    }
+    public function update($id, Request $request)
+    {
+        $post = Post::findOrFail($id);
+        $post->title = request()->title;
+        $post->description = request()->description;
+        $post->user_id = request()->post_creator;
+        $post->save();
         return redirect()->route('posts.index');
     }
 }

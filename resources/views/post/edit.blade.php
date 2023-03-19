@@ -3,7 +3,7 @@
 @section('title') Edit @endsection
 
 @section('content')
-<form action="{{ route('posts.store') }}" method="POST">
+<form action="{{ route('posts.update', $post['id']) }}" method="POST">
     @csrf
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Title</label>
@@ -15,12 +15,17 @@
     </div>
 
     <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Post Creator</label>
-        <select name="post_creator" class="form-control">
-            <option value="1">A</option>
-            <option value="2">B</option>
-        </select>
-    </div>
+            <label for="exampleFormControlTextarea1" class="form-label">Post Creator</label>
+            <select name="post_creator" class="form-control">
+                @foreach($users as $user)
+                    @if($user == $post->User->name)
+                        <option value="{{$user->id}}" selected>{{$user->name}}</option>
+                    @else
+                        <option value="{{$user->id}}">{{$user->name}}</option>
+                    @endif
+                @endforeach
+            </select>
+        </div>
     <button type="submit" class="btn btn-success" value="">Edit</button>
 </form>
 

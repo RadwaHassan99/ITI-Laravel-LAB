@@ -29,9 +29,6 @@
                 <x-button type="primary" :route-param="$post['id']">View</x-button>
                 <x-button type="secondary" :route-param="$post['id']">Edit</x-button>
 
-
-
-
                 <form method="POST" action="{{route('posts.destroy',$post->id)}}" style="display: inline-block;" onsubmit="return confirm('Are you sure you want to delete this post?')">
                     @method('DELETE')
                     @csrf
