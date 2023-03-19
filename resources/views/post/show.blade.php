@@ -24,11 +24,28 @@
     <div class="card-body">
         <p class="card-text">{{$comment->body}}</p>
         <p class="card-text">Created at: {{$comment->created_at}}</p>
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary edit-comment-btn" data-comment-id="{{$comment->id}}">Edit</button>
+
+            <form method="POST" action="{{ route('comments.destroy', $comment->id) }}">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </div>
+
+        <form method="POST" action="{{ route('comments.update', $comment) }}" style="display:none;" id="edit-comment-form-{{$comment->id}}">
+            @csrf
+            @method('PUT')
+            <div class="form-group">
+                <label for="body">Comment</label>
+                <textarea class="form-control" id="body" name="body" rows="3">{{$comment->body}}</textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
     </div>
 </div>
 @endforeach
-
-
 
 
 <div class="card" style="margin-top: 10px;">
@@ -44,9 +61,30 @@
             </div>
             <input type="hidden" name="commentable_id" value="{{ $post->id }}">
             <input type="hidden" name="commentable_type" value="App\Models\Post">
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <input type="hidden" name="comment_id" value="{{ isset($comment) ? $comment->id : '' }}">
+            <button type="submit" class="btn btn-primary">Insert</button>
         </form>
+
 
     </div>
 </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var editCommentBtns = document.querySelectorAll('.edit-comment-btn');
+
+    editCommentBtns.forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var commentId = this.getAttribute('data-comment-id');
+        var editCommentForm = document.getElementById('edit-comment-form-' + commentId);
+        if (editCommentForm.style.display === 'none') {
+          editCommentForm.style.display = 'block';
+        } else {
+          editCommentForm.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+
 @endsection
