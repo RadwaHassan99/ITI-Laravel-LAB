@@ -35,7 +35,8 @@ class PostController extends Controller
         ];
         return view('post.edit', ['post' => $post]);
     }
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $title = request()->title;
         $description = request()->description;
         $postCreator = request()->post_creator;
@@ -48,5 +49,11 @@ class PostController extends Controller
         return redirect()->route('posts.index');
     }
 
+    public function destroy($id)
+    {
+        $post = Post::findOrFail($id);
+        $post->delete();
 
+        return redirect()->route('posts.index');
+    }
 }
