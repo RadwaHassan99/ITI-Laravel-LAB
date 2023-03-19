@@ -10,6 +10,8 @@
         <div class="card-body">
             <h5 class="card-title">Title: {{$post['title']}}</h5>
             <p class="card-text">Description: {{$post['description']}}</p>
+            <p class="card-text">Post Creator: {{$post->User->name ?? "Not Found"}}</p>
+            <p class="card-text">Created at: {{$post['created_at']}}</p>
         </div>
     </div>
 @endsection

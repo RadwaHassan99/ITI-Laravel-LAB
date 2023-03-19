@@ -1,8 +1,6 @@
+
 @extends('layouts.app')
-
-
 @section('title') Index @endsection
-
 @section('content')
 <div class="text-center">
     <x-button type="success">Create Post</x-button>
