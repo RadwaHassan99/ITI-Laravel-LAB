@@ -64,16 +64,4 @@ class PostController extends Controller
         $post->save();
         return redirect()->route('posts.index');
     }
-    /*
-    public function storeComment(Request $request)
-{
-    $comment = new Comment;
-    $comment->body = $request->body;
-    $comment->commentable_id = $request->commentable_id;
-    $comment->commentable_type = $request->commentable_type;
-    $comment->save();
-    return back();
-}*/
-
-
 }

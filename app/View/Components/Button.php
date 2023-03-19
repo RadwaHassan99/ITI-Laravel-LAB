@@ -10,43 +10,38 @@ class Button extends Component
 {
     public $type;
     public $url;
-    public $routeParam;
+    public $postId;
 
-    public function __construct($type = null, $routeParam = null)
+    public function __construct($type = null, $postId = null)
     {
         $this->type = $type;
-        $this->url = $this->getUrl() ?? "";
-        $this->routeParam = $routeParam;
+        $this->postId = $postId;
+        $this->url = $this->getUrl();
     }
-
 
     public function getUrl()
     {
         switch ($this->type) {
             case 'success':
-                return route('posts.create',"");
+                return route('posts.create');
                 break;
 
             case 'primary':
-                return route('posts.show', "");
+                return route('posts.show', ['post' => $this->postId]);
                 break;
 
-
             case 'secondary':
-                return route('posts.edit',"");
+                return route('posts.edit', ['post' => $this->postId]);
                 break;
 
             case 'danger':
-                return route('posts.destroy',"");
+                return route('posts.destroy', ['post' => $this->postId]);
                 break;
 
             default:
                 return '#';
         }
     }
-
-
-
 
     public function render(): View|Closure|string
     {
