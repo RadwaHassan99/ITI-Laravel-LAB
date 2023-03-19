@@ -18,7 +18,7 @@
             <label for="exampleFormControlTextarea1" class="form-label">Post Creator</label>
             <select name="post_creator" class="form-control">
                 @foreach($users as $user)
-                    @if($user == $post->User->name)
+                    @if($user->name == $post->User->name)
                         <option value="{{$user->id}}" selected>{{$user->name}}</option>
                     @else
                         <option value="{{$user->id}}">{{$user->name}}</option>
