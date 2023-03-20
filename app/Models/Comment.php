@@ -15,6 +15,6 @@ class Comment extends Model
     }
     public function getHumanReadableDateAttribute()
     {
-        return Carbon::parse($this->created_at)->format('Y-m-d');
+        return Carbon::parse($this->created_at)->format('Y-m-d H:i:s');
     }
 }
