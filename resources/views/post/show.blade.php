@@ -11,7 +11,7 @@
         <h5 class="card-title">Title: {{$post['title']}}</h5>
         <p class="card-text">Description: {{$post['description']}}</p>
         <p class="card-text">Post Creator: {{$post->User->name ?? "Not Found"}}</p>
-        <p class="card-text">Created at: {{$post['created_at']}}</p>
+        <p class="card-text">Created at: {{$post->human_readable_date}}</p>
     </div>
 </div>
 
@@ -23,7 +23,7 @@
     </div>
     <div class="card-body">
         <p class="card-text">{{$comment->body}}</p>
-        <p class="card-text">Created at: {{$comment->created_at}}</p>
+        <p class="card-text">Created at: {{$post->human_readable_date}}</p>
         <div class="btn-group">
             <button type="button" class="btn btn-primary edit-comment-btn" data-comment-id="{{$comment->id}}">Edit</button>
 

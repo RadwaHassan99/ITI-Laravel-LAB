@@ -24,7 +24,7 @@
             <td>{{$post['id']}}</td>
             <td>{{$post['title']}}</td>
             <td>{{$post->User->name ?? "Not Found"}}</td>
-            <td>{{$post['created_at']}}</td>
+            <td>{{{$post->human_readable_date}}}</td>
             <td>
                 @if($post->deleted_at)
                 <form action="{{route('posts.restore', $post->id) }}" method="POST" style="display: inline-block;">
