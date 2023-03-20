@@ -17,9 +17,9 @@ class PostController extends Controller
         return view('post.index', ['posts' => $allPosts]);
     }
 
-    public function show($id)
+    public function show($post)
     {
-        $post = Post::where('id', $id)->first(); //Post model object ... select * from posts where id = 1 limit 1;
+        $post = Post::where('id', $post)->first(); //Post model object ... select * from posts where id = 1 limit 1;
         return view('post.show', ['post' => $post]);
     }
 
@@ -29,50 +29,47 @@ class PostController extends Controller
         return view('post.create', ['users' => $users]);
     }
 
-    public function edit($id)
+    public function edit($post)
     {
-        $post = Post::where('id', $id)->first(); //Post model object ... select * from posts where id = 1 limit 1;
+        $post = Post::where('id', $post)->first(); //Post model object ... select * from posts where id = 1 limit 1;
         $users = User::all();
         return view('post.edit', ['post' => $post, 'users' => $users]);
     }
 
     public function store(Request $request)
     {
-        $title = request()->title;
-        $description = request()->description;
-        $postCreator = request()->post_creator;
         Post::create([
-            'title' => $title,
-            'description' => $description,
-            'user_id' => $postCreator,
+            'title' => $request->title,
+            'description' => $request->description,
+            'user_id' => $request->post_creator,
         ]);
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index')->with('success','posts added successfully!');
     }
 
-    public function destroy($id)
+    public function destroy($post)
     {
-        $post = Post::findOrFail($id);
+        $post = Post::findOrFail($post);
         $post->delete();
-        return redirect()->route('posts.index')->with('success', 'Post deleted successfully');
+        return back()->with('success','post deleted successfully!');
     }
 
-    public function update($id, Request $request)
+    public function update($post, Request $request)
     {
-        $post = Post::findOrFail($id);
-        $post->title = request()->title;
-        $post->description = request()->description;
-        $post->user_id = request()->post_creator;
-        $post->save();
-        return redirect()->route('posts.index');
+        $post = Post::findOrFail($post);
+        $post->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'user_id' => $request->post_creator,
+        ]);
+        return redirect()->route('posts.index')->with('success','post updated successfully!');
     }
 
-    public function restore($id)
+    public function restore($post)
     {
-        $post = Post::withTrashed()->findOrFail($id);
+        $post = Post::withTrashed()->findOrFail($post);
         $post->restore();
-
-        return redirect()->route('posts.index')->with('success', 'Post restored successfully');
+        return back()->with('success','post restored successfully!');
     }
 
 

@@ -13,8 +13,8 @@ class Comment extends Model
     {
         return $this->morphTo();
     }
-    public function getCreatedAtAttribute($value)
+    public function getHumanReadableDateAttribute()
     {
-        return Carbon::parse($value)->format('Y-m-d');
+        return Carbon::parse($this->created_at)->format('Y-m-d');
     }
 }

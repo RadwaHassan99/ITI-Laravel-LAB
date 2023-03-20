@@ -2,11 +2,10 @@
 @section('title') Index @endsection
 @section('content')
 
-
-
-<div class="text-center">
+<div class="text-center mb-3">
     <x-button type="success">Create Post</x-button>
 </div>
+
 <table class="table mt-4">
     <thead>
         <tr>
@@ -48,8 +47,6 @@
         </tr>
         @endforeach
         {{ $posts->links('pagination::bootstrap-5') }}
-
-
     </tbody>
 </table>
 

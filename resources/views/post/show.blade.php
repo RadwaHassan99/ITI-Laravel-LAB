@@ -23,7 +23,7 @@
     </div>
     <div class="card-body">
         <p class="card-text">{{$comment->body}}</p>
-        <p class="card-text">Created at: {{$post->human_readable_date}}</p>
+        <p class="card-text">Created at: {{$comment->human_readable_date}}</p>
         <div class="btn-group">
             <button type="button" class="btn btn-primary edit-comment-btn" data-comment-id="{{$comment->id}}">Edit</button>
 

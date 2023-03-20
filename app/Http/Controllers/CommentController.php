@@ -15,7 +15,7 @@ class CommentController extends Controller
         $comment->commentable_id = $request->commentable_id;
         $comment->commentable_type = $request->commentable_type;
         $comment->save();
-        return back();
+        return back()->with('success','comment added successfully!');;
     }
 
     public function update(Request $request, $id)
@@ -23,7 +23,7 @@ class CommentController extends Controller
         $comment = Comment::findOrFail($id);
         $comment->body = $request->body;
         $comment->save();
-        return back();
+        return back()->with('success','comment updated successfully!');;
     }
 
 
@@ -31,7 +31,6 @@ class CommentController extends Controller
     {
         $comment = Comment::findOrFail($id);
         $comment->delete();
-
-        return back();
+        return back()->with('success','comment deleted successfully!');;
     }
 }
