@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\User;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -12,7 +13,7 @@ class PostController extends Controller
 {
     public function index()
     {
-        $allPosts = Post::paginate(3);
+        $allPosts = Post::withTrashed()->paginate(3);
         return view('post.index', ['posts' => $allPosts]);
     }
 
@@ -53,8 +54,9 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $post->delete();
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index')->with('success', 'Post deleted successfully');
     }
+
     public function update($id, Request $request)
     {
         $post = Post::findOrFail($id);
@@ -64,4 +66,14 @@ class PostController extends Controller
         $post->save();
         return redirect()->route('posts.index');
     }
+
+    public function restore($id)
+    {
+        $post = Post::withTrashed()->findOrFail($id);
+        $post->restore();
+
+        return redirect()->route('posts.index')->with('success', 'Post restored successfully');
+    }
+
+
 }
