@@ -2,7 +2,7 @@
 @section('title') Index @endsection
 @section('content')
 
-<div class="text-center mb-3">
+<div class="mb-3">
     <x-button type="success">Create Post</x-button>
 </div>
 
@@ -21,7 +21,7 @@
         @foreach($posts as $post)
         <tr class="post-row">
             <td>{{$post['id']}}</td>
-            <td>{{$post['title']}}</td>
+            <td>{{$post['slug']}}</td>
             <td>{{$post->User->name ?? "Not Found"}}</td>
             <td>{{{$post->human_readable_date}}}</td>
             <td>
@@ -46,11 +46,7 @@
 
         </tr>
         @endforeach
-        {{ $posts->links('pagination::bootstrap-5') }}
     </tbody>
 </table>
-
-
-
-
+{{ $posts->links('pagination::bootstrap-5') }}
 @endsection

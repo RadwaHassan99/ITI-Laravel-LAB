@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::table('posts', function (Blueprint $table) {
             //
-            $table->softDeletes()->nullable();
+            $table->string('slug')->unique()->nullable();
         });
     }
 
     /**
      * Reverse the migrations.
      */
-
+    
 };

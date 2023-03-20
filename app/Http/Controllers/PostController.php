@@ -7,6 +7,7 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
+use App\Http\Requests\StorePostRequest;
 
 
 class PostController extends Controller
@@ -36,7 +37,7 @@ class PostController extends Controller
         return view('post.edit', ['post' => $post, 'users' => $users]);
     }
 
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
         Post::create([
             'title' => $request->title,
@@ -54,7 +55,7 @@ class PostController extends Controller
         return back()->with('success','post deleted successfully!');
     }
 
-    public function update($post, Request $request)
+    public function update($post, StorePostRequest $request)
     {
         $post = Post::findOrFail($post);
         $post->update([
