@@ -13,7 +13,7 @@
             <th scope="col">Title</th>
             <th scope="col">Posted By</th>
             <th scope="col">Created At</th>
-            <th scope="col">Actions</th>
+            <th scope="col">Image Path</th>
         </tr>
     </thead>
     <tbody>
@@ -24,6 +24,7 @@
             <td>{{$post['slug']}}</td>
             <td>{{$post->User->name ?? "Not Found"}}</td>
             <td>{{{$post->human_readable_date}}}</td>
+            <td>{{$post['image_path']}}</td>
             <td>
                 @if($post->deleted_at)
                 <form action="{{route('posts.restore', $post->id) }}" method="POST" style="display: inline-block;">

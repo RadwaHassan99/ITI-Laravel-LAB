@@ -5,7 +5,7 @@
 
 @section('content')
 
-<form action="{{ route('posts.store') }}" method="POST">
+<form action="{{ route('posts.store') }}" method="POST" enctype="multipart/form-data">
     @csrf
     <div class="mb-3">
         <label for="exampleFormControlInput1" class="form-label">Title</label>
@@ -31,6 +31,13 @@
         </select>
         @if ($errors->has('user_id'))
         <div class="alert alert-danger">{{ $errors->first('user_id') }}</div>
+        @endif
+    </div>
+    <div class="mb-3">
+        <label for="exampleFormControlTextarea1" class="form-label">Image</label>
+        <input type="file" name="image" accept=".jpg,.png" class="form-control">
+        @if ($errors->has('image'))
+        <div class="alert alert-danger">{{ $errors->first('image') }}</div>
         @endif
     </div>
     <button type="submit" class="btn btn-success">Create</button>

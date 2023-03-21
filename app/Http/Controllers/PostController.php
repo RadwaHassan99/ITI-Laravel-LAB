@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use App\Http\Requests\StorePostRequest;
+use Illuminate\Support\Facades\Storage;
+
 
 
 class PostController extends Controller
@@ -39,39 +41,59 @@ class PostController extends Controller
 
     public function store(StorePostRequest $request)
     {
-        Post::create([
+        $post = Post::create([
             'title' => $request->title,
             'description' => $request->description,
             'user_id' => $request->post_creator,
         ]);
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = $image->getClientOriginalName();
+            $path = Storage::putFileAs('posts', $image, $filename);
+            $post->image_path = $path;
+            $post->save();
+        }
 
-        return redirect()->route('posts.index')->with('success','posts added successfully!');
+        return redirect()->route('posts.index')->with('success', 'posts added successfully!');
     }
 
     public function destroy($post)
     {
         $post = Post::findOrFail($post);
+        if ($post->image && Storage::exists($post->image)) {
+            Storage::delete($post->image);
+        }
         $post->delete();
-        return back()->with('success','post deleted successfully!');
+        return back()->with('success', 'post deleted successfully!');
     }
 
     public function update($post, StorePostRequest $request)
     {
         $post = Post::findOrFail($post);
+
+        if ($request->hasFile('image')) {
+            if ($post->image_path) {
+                Storage::delete($post->image_path);
+            }
+            $image = $request->file('image');
+            $filename = $image->getClientOriginalName();
+            $path = Storage::putFileAs('posts', $image, $filename);
+            $post->image_path = $path;
+        }
+
         $post->update([
             'title' => $request->title,
             'description' => $request->description,
             'user_id' => $request->post_creator,
         ]);
-        return redirect()->route('posts.index')->with('success','post updated successfully!');
+        return redirect()->route('posts.index')->with('success', 'post updated successfully!');
     }
+
 
     public function restore($post)
     {
         $post = Post::withTrashed()->findOrFail($post);
         $post->restore();
-        return back()->with('success','post restored successfully!');
+        return back()->with('success', 'post restored successfully!');
     }
-
-
 }

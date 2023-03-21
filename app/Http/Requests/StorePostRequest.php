@@ -28,7 +28,7 @@ class StorePostRequest extends FormRequest
                 'required',
                 'string',
                 'min:3',
-                'slug' => 'unique:posts',
+                //'slug' => 'unique:posts',
                 Rule::unique('posts')->ignore($this->post),
             ],
             'description' => [
@@ -38,6 +38,9 @@ class StorePostRequest extends FormRequest
             ],
             'user_id' => [
                 'exists:users,id',
+            ],
+            'image' => [
+                'mimes:jpeg,png',
             ],
         ];
     }
