@@ -6,12 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
+use Cviebrock\EloquentSluggable\Sluggable;
+
 
 class Post extends Model
 {
-    use HasFactory, SoftDeletes, HasSlug;
+    use HasFactory, SoftDeletes, Sluggable;
     protected $fillable = [
         'title',
         'description',
@@ -33,10 +33,13 @@ class Post extends Model
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
-    public function getSlugOptions() : SlugOptions
+
+    public function sluggable(): array
     {
-        return SlugOptions::create()
-            ->generateSlugsFrom('title')
-            ->saveSlugsTo('slug');
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
     }
 }
