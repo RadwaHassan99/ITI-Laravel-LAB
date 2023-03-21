@@ -36,15 +36,31 @@
                 @else
                 <x-button type="primary" :post-id="$post->id">View</x-button>
                 <x-button type="secondary" :post-id="$post->id">Edit</x-button>
-                <form method="POST" action="{{ route('posts.destroy', $post->id) }}" style="display: inline-block;" onsubmit="return confirm('Are you sure you want to delete this post?')">
-                    @method('DELETE')
-                    @csrf
-                    <button type="submit" class="btn btn-danger" value="">Delete</button>
-                </form>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{$post->id}}">Delete</button>
                 @endif
 
             </td>
-
+            <div class="modal fade" id="deleteModal{{$post->id}}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Delete Item?</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to delete this post?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <form method="POST" action="{{ route('posts.destroy', $post->id) }}" style="display: inline-block;">
+                                    @method('DELETE')
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </tr>
         @endforeach
     </tbody>
