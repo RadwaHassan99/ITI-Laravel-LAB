@@ -41,6 +41,12 @@
         <div class="alert alert-danger">{{ $errors->first('image') }}</div>
         @endif
     </div>
+
+    <div class="mb-3">
+        <label for="exampleFormControlInput5" class="form-label">Tags</label>
+        <input name="tags" type="text" class="form-control" id="exampleFormControlInput5">
+    </div>
+
     <button type="submit" class="btn btn-success">Create</button>
 
 </form>

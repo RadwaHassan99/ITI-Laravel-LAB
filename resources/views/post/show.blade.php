@@ -9,10 +9,18 @@
     </div>
     <div class="card-body">
         <h5 class="card-title">Title: {{$post['slug']}}</h5>
-        <p class="card-text">Description: {{$post['description']}}</p>
-        <p class="card-text">Post Creator: {{$post->User->name ?? "Not Found"}}</p>
-        <p class="card-text">Created at: {{$post->created_at}}</p>
-        <p class="card-text">Image Path: {{$post['image_path']}}</p>
+        <p class="card-text"><strong>Description:</strong> {{$post['description']}}</p>
+        <p class="card-text"><strong>Post Creator:</strong> {{$post->User->name ?? "Not Found"}}</p>
+        <p class="card-text"><strong>Created at:</strong> {{$post->created_at}}</p>
+        <p class="card-text"><strong>Image Path:</strong> {{$post['image_path']}}</p>
+        <p class="card-text"><strong>Tags:</strong>
+            @foreach ($post->tags as $tag)
+            <span style="list-style-type:none">{{ $tag->name }},</span>
+            @endforeach
+
+        </p>
+
+
 
     </div>
 </div>
@@ -66,27 +74,25 @@
             <input type="hidden" name="comment_id" value="{{ isset($comment) ? $comment->id : '' }}">
             <button type="submit" class="btn btn-primary">Insert</button>
         </form>
-
-
     </div>
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function() {
-    var editCommentBtns = document.querySelectorAll('.edit-comment-btn');
+    document.addEventListener('DOMContentLoaded', function() {
+        var editCommentBtns = document.querySelectorAll('.edit-comment-btn');
 
-    editCommentBtns.forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var commentId = this.getAttribute('data-comment-id');
-        var editCommentForm = document.getElementById('edit-comment-form-' + commentId);
-        if (editCommentForm.style.display === 'none') {
-          editCommentForm.style.display = 'block';
-        } else {
-          editCommentForm.style.display = 'none';
-        }
-      });
+        editCommentBtns.forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                var commentId = this.getAttribute('data-comment-id');
+                var editCommentForm = document.getElementById('edit-comment-form-' + commentId);
+                if (editCommentForm.style.display === 'none') {
+                    editCommentForm.style.display = 'block';
+                } else {
+                    editCommentForm.style.display = 'none';
+                }
+            });
+        });
     });
-  });
 </script>
 
 @endsection

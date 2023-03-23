@@ -14,6 +14,7 @@
             <th scope="col">Posted By</th>
             <th scope="col">Created At</th>
             <th scope="col">Image Path</th>
+            <th scope="col">Tags</th>
         </tr>
     </thead>
     <tbody>
@@ -25,6 +26,12 @@
             <td>{{$post->User->name ?? "Not Found"}}</td>
             <td>{{{$post->human_readable_date}}}</td>
             <td>{{$post['image_path']}}</td>
+            <td>
+                @foreach ($post->tags as $tag)
+                <span style="list-style-type:none">{{ $tag->name }},</span>
+                @endforeach
+            </td>
+
             <td>
                 @if($post->deleted_at)
                 <form action="{{route('posts.restore', $post->id) }}" method="POST" style="display: inline-block;">
@@ -52,11 +59,11 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                <form method="POST" action="{{ route('posts.destroy', $post->id) }}" style="display: inline-block;">
-                                    @method('DELETE')
-                                    @csrf
-                                    <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
+                            <form method="POST" action="{{ route('posts.destroy', $post->id) }}" style="display: inline-block;">
+                                @method('DELETE')
+                                @csrf
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
                         </div>
                     </div>
                 </div>

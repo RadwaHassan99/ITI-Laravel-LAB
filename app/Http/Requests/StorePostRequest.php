@@ -14,7 +14,7 @@ class StorePostRequest extends FormRequest
      */
     public function authorize(): bool
     {
-         return true;
+        return true;
     }
 
     /**
@@ -38,12 +38,19 @@ class StorePostRequest extends FormRequest
                 'min:10',
             ],
             'post_creator' => [
+                'required',
                 'exists:users,id',
                 new MaxPosts,
             ],
             'image' => [
                 'mimes:jpeg,png',
             ],
+
+            'tags' => [
+                'nullable',
+                'string',
+            ],
+
         ];
     }
 }

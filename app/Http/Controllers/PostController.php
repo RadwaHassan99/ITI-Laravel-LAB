@@ -55,6 +55,7 @@ class PostController extends Controller
             $post->image_path = $path;
             $post->save();
         }
+        $post->syncTags(explode(',', $request->input('tags')));
         return redirect()->route('posts.index')->with('success', 'posts added successfully!');
     }
 

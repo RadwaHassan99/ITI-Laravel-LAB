@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Spatie\Tags\HasTags;
 
 
 class Post extends Model
 {
-    use HasFactory, SoftDeletes, Sluggable;
+    use HasFactory, SoftDeletes, Sluggable, HasTags;
     protected $fillable = [
         'title',
         'description',
@@ -20,6 +21,7 @@ class Post extends Model
     ];
 
     protected $dates = ['deleted_at'];
+    protected $tagsField = 'tags';
 
     public function user()
     {

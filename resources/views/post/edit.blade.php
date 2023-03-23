@@ -44,6 +44,14 @@
         <div class="alert alert-danger">{{ $errors->first('image') }}</div>
         @endif
     </div>
+
+    <div class="mb-3">
+        <label for="exampleFormControlInput4" class="form-label">Tags</label>
+        @foreach ($post->tags as $tag)
+        <input type="file" name="tags" class="form-control" id="exampleFormControlInput4">
+        @endforeach
+    </div>
+
     <button type="submit" class="btn btn-success" value="">Edit</button>
 </form>
 
