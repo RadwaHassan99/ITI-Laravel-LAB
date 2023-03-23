@@ -23,19 +23,20 @@
     </div>
 
     <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Post Creator</label>
-        <select name="post_creator" class="form-control">
+        <label for="exampleFormControlInput3" class="form-label">Post Creator</label>
+        <select name="post_creator" class="form-control" id="exampleFormControlInput3">
+            <option value="" disabled selected hidden></option>
             @foreach($users as $user)
             <option value="{{$user->id}}">{{$user->name}}</option>
             @endforeach
         </select>
-        @if ($errors->has('user_id'))
-        <div class="alert alert-danger">{{ $errors->first('user_id') }}</div>
+        @if ($errors->has('post_creator'))
+        <div class="alert alert-danger">{{ $errors->first('post_creator') }}</div>
         @endif
     </div>
     <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Image</label>
-        <input type="file" name="image" accept=".jpg,.png" class="form-control">
+        <label for="exampleFormControlInput4" class="form-label">Image</label>
+        <input type="file" name="image" accept=".jpg,.png" class="form-control" id="exampleFormControlInput4">
         @if ($errors->has('image'))
         <div class="alert alert-danger">{{ $errors->first('image') }}</div>
         @endif

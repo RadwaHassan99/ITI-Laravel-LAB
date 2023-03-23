@@ -22,8 +22,8 @@
     </div>
 
     <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Post Creator</label>
-        <select name="post_creator" class="form-control">
+        <label for="exampleFormControlInput3" class="form-label">Post Creator</label>
+        <select name="post_creator" class="form-control" id="exampleFormControlInput3">
             @foreach($users as $user)
             @if($post->User && $user->name == $post->User->name)
             <option value="{{$user->id}}" selected>{{$user->name ?? "NOT FOUND"}}</option>
@@ -38,8 +38,8 @@
     </div>
 
     <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Image</label>
-        <input type="file" name="image" accept=".jpg,.png" class="form-control">
+        <label for="exampleFormControlInput4" class="form-label">Image</label>
+        <input type="file" name="image" accept=".jpg,.png" class="form-control" id="exampleFormControlInput4">
         @if ($errors->has('image'))
         <div class="alert alert-danger">{{ $errors->first('image') }}</div>
         @endif

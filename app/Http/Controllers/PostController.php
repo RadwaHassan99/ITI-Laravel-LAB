@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\View\View;
 use App\Http\Requests\StorePostRequest;
 use Illuminate\Support\Facades\Storage;
+use App\Jobs\PruneOldPostsJob;
+
 
 
 
@@ -53,7 +55,6 @@ class PostController extends Controller
             $post->image_path = $path;
             $post->save();
         }
-
         return redirect()->route('posts.index')->with('success', 'posts added successfully!');
     }
 
@@ -86,6 +87,8 @@ class PostController extends Controller
             'description' => $request->description,
             'user_id' => $request->post_creator,
         ]);
+        $post->refreshSlug();
+
         return redirect()->route('posts.index')->with('success', 'post updated successfully!');
     }
 
@@ -95,5 +98,12 @@ class PostController extends Controller
         $post = Post::withTrashed()->findOrFail($post);
         $post->restore();
         return back()->with('success', 'post restored successfully!');
+    }
+
+
+    public function pruneOldPosts()
+    {
+        PruneOldPostsJob::dispatch();
+        return "Old posts pruning job dispatched!";
     }
 }

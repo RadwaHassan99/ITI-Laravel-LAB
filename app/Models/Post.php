@@ -16,6 +16,7 @@ class Post extends Model
         'title',
         'description',
         'user_id',
+        'slug'
     ];
 
     protected $dates = ['deleted_at'];
@@ -41,5 +42,10 @@ class Post extends Model
                 'source' => 'title'
             ]
         ];
+    }
+    public function refreshSlug()
+    {
+        $this->slug = null;
+        $this->save();
     }
 }
