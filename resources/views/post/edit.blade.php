@@ -39,18 +39,12 @@
 
     <div class="mb-3">
         <label for="exampleFormControlInput4" class="form-label">Image</label>
-        <input type="file" name="image" accept=".jpg,.png" class="form-control" id="exampleFormControlInput4">
+        <input type="file" name="image" class="form-control" id="exampleFormControlInput4">
         @if ($errors->has('image'))
         <div class="alert alert-danger">{{ $errors->first('image') }}</div>
         @endif
     </div>
 
-    <div class="mb-3">
-        <label for="exampleFormControlInput4" class="form-label">Tags</label>
-        @foreach ($post->tags as $tag)
-        <input type="file" name="tags" class="form-control" id="exampleFormControlInput4">
-        @endforeach
-    </div>
 
     <button type="submit" class="btn btn-success" value="">Edit</button>
 </form>
