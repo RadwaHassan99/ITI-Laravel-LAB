@@ -32,8 +32,8 @@
             @endif
             @endforeach
         </select>
-        @if ($errors->has('user_id'))
-        <div class="alert alert-danger">{{ $errors->first('user_id') }}</div>
+        @if ($errors->has('post_creator'))
+        <div class="alert alert-danger">{{ $errors->first('post_creator') }}</div>
         @endif
     </div>
 

@@ -12,7 +12,7 @@
         <p class="card-text"><strong>Description:</strong> {{$post['description']}}</p>
         <p class="card-text"><strong>Post Creator:</strong> {{$post->User->name ?? "Not Found"}}</p>
         <p class="card-text"><strong>Created at:</strong> {{$post->created_at}}</p>
-        <p class="card-text"><strong>Image Path:</strong> {{$post['image_path']}}</p>
+        <p class="card-text"><strong>Image:</strong> <img src="{{ asset('storage/'. str_replace('public/', '', $post['image_path'])) }}"></p>
         <p class="card-text"><strong>Tags:</strong>
             @foreach ($post->tags as $tag)
             <span style="list-style-type:none">{{ $tag->name }},</span>

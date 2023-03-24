@@ -50,11 +50,12 @@ class PostController extends Controller
         ]);
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $filename = $image->getClientOriginalName();
-            $path = Storage::putFileAs('posts', $image, $filename);
+            $path = $image->storeAs('public/posts', $image->getClientOriginalName());
             $post->image_path = $path;
-            $post->save();
         }
+
+
+        $post->save();
         $post->syncTags(explode(',', $request->input('tags')));
         return redirect()->route('posts.index')->with('success', 'posts added successfully!');
     }
@@ -77,10 +78,9 @@ class PostController extends Controller
             if ($post->image_path) {
                 Storage::delete($post->image_path);
             }
-            $image = $request->file('image');
-            $filename = $image->getClientOriginalName();
-            $path = Storage::putFileAs('posts', $image, $filename);
-            $post->image_path = $path;
+                $image = $request->file('image');
+                $path = $image->storeAs('public/posts', $image->getClientOriginalName());
+                $post->image_path = $path;
         }
 
         $post->update([
