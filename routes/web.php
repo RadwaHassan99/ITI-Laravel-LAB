@@ -5,7 +5,7 @@ use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Auth\SocialAuthController;
-
+use Illuminate\Support\Facades\Auth;
 
 
 /*
@@ -44,13 +44,24 @@ Route::put('/profile', [ProfileController::class, 'update'])->name('profile.upda
 Route::get('/auth/{provider}', [SocialAuthController::class, 'redirectToProvider']);
 Route::get('/auth/{provider}/callback', [SocialAuthController::class, 'handleProviderCallback']);
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
 /*
 Route::get('/auth/github', function () {
     return Socialite::driver('github')->redirect();
 });
 Route::get('/auth/github/callback', function () {
     $githubUser = Socialite::driver('github')->user();
-    $user = User::firstOrCreate(
+    $user = User::updateOrCreate(
         ['email' => $githubUser->email],
         [
             'name' => $githubUser->name,
@@ -71,7 +82,7 @@ Route::get('/auth/google', function () {
 
 Route::get('/auth/google/callback', function () {
     $googleUser = Socialite::driver('google')->user();
-    $user = User::firstOrCreate(
+    $user = User::updateOrCreate(
         ['email' => $googleUser->email],
         [
             'name' => $googleUser->name,
@@ -87,10 +98,4 @@ Route::get('/auth/google/callback', function () {
     return redirect()->route('posts.index');
 });*/
 
-Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
