@@ -55,7 +55,7 @@ Route::get('/auth/github/callback', function () {
         ['email' => $githubUser->email],
         [
             'name' => $githubUser->name,
-            'password' => Hash::make(Str::random(24)), // generate a random password
+            'password' => Hash::make(Str::random(24)),
             'github_id' => $githubUser->id,
             'github_token' => $githubUser->token,
             'github_refresh_token' => $githubUser->refreshToken,
