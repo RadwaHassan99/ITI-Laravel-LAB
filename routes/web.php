@@ -4,11 +4,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
-use Laravel\Socialite\Facades\Socialite;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\SocialAuthController;
+
 
 
 /*
@@ -44,8 +41,10 @@ Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->nam
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit')->middleware('auth');
 Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 
+Route::get('/auth/{provider}', [SocialAuthController::class, 'redirectToProvider']);
+Route::get('/auth/{provider}/callback', [SocialAuthController::class, 'handleProviderCallback']);
 
-
+/*
 Route::get('/auth/github', function () {
     return Socialite::driver('github')->redirect();
 });
@@ -86,7 +85,7 @@ Route::get('/auth/google/callback', function () {
     Auth::login($user);
 
     return redirect()->route('posts.index');
-});
+});*/
 
 Auth::routes();
 
