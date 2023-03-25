@@ -18,6 +18,7 @@ class PostResource extends JsonResource
             'id'=>$this->id,
             'title'=>$this->title,
             'description'=>$this->description,
+            'comments_count' => $this->comments()->count(),
             'user'=>new UserResource($this->user),
         ];
     }
