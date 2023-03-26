@@ -20,9 +20,9 @@
 
 </head>
 
-<body>
+<body style="background-color:#F5F5DC">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light  shadow-sm" style="background-color:#8FBC8F">
             <div class="container">
                 <a class="navbar-brand mr-5" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}

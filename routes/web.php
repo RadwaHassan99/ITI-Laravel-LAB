@@ -21,6 +21,9 @@ use Illuminate\Support\Facades\Auth;
 
 
 Route::resource('posts', PostController::class)->middleware('auth');
+Route::get('/', function () {
+    return view('welcome');
+});
 
 /*Route::group(['middleware' => ['auth']],function(){
     Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
